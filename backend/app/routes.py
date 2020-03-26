@@ -1,6 +1,11 @@
-from flask import Flask, jsonify
+from app import app
+from flask import jsonify
 
-app = Flask(__name__)
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return "Hello, World!"
 
 
 @app.route("/songs")
