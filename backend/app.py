@@ -1,21 +1,26 @@
-from aiohttp import web
+from flask import Flask, jsonify
 
-from handlers import handle_songs
-
-
-def setup() -> web.Application:
-    app = web.Application()
-    app.add_routes(
-        [
-            web.get('/songs', handle_songs),
-            # web.post('/vote', handle),  # --> 201 || 400 (saves to DB, generates validation code, sends email)
-            # web.get('/validate', handle),  # --> 201 || 401
-            # web.get('/results', handle),  # -->
-        ]
-    )
-
-    return app
+app = Flask(__name__)
 
 
-if __name__ == '__main__':
-    web.run_app(setup())
+@app.route("/songs")
+def list_songs():
+    """Returns a JSON blob with the list of songs.
+    """
+    songs = [
+        {
+            "id": 1,
+            "title":  "Running",
+            "country": "Cyprus",
+            "artist": "Sandro",
+            "link": "https://www.youtube.com/watch?v=Jl_qEw_4OK0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=21"
+        },
+        {
+            "id": 3,
+            "title":  "Violent Thing",
+            "country": "Germany",
+            "artist": "Ben Dolic",
+            "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31"
+        }
+    ]
+    return jsonify(songs)

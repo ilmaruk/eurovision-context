@@ -6,4 +6,6 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "app.py"]
+ENV FLASK_APP /app/app.py
+
+CMD ["flask", "run", "--host=0.0.0.0"]
