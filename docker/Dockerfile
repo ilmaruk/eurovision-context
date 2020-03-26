@@ -1,6 +1,6 @@
 FROM node:12
 
-COPY frontend/ /app
+COPY gitfrontend/ /app
 
 WORKDIR /app
 

@@ -1,0 +1,13 @@
+html {
+  background-color: #ffffff;
+
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
