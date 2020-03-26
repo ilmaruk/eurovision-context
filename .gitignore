@@ -1,0 +1,9 @@
+# Python
+venv/
+*.pyc
+
+# IDEs
+.idea/
+
+# Docker
+docker-compose.override.yaml
