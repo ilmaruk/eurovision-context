@@ -1,8 +1,17 @@
 version: "3.7"
+
 services:
   frontend:
     build:
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/frontend.dockerfile
       context: .
-    ports:
-      - "3000:3000"
+
+  backend:
+    build:
+      dockerfile: docker/backend.dockerfile
+      context: .
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8
