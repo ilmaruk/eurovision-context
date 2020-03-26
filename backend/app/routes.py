@@ -1,6 +1,8 @@
 from app import app
 from flask import jsonify
 
+from app.repository import get_all_songs
+
 
 @app.route('/')
 @app.route('/index')
@@ -28,4 +30,4 @@ def list_songs():
             "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31"
         }
     ]
-    return jsonify(songs)
+    return jsonify([s.serialise() for s in get_all_songs()])
