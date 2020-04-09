@@ -45,3 +45,6 @@ restart-frontend: stop start-frontend
 
 backend-shell:
 	docker-compose exec backend bash
+
+migrate:
+	docker-compose up --build migrator
