@@ -1,9 +1,12 @@
+import os
 import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from http import HTTPStatus
 
 from flask import jsonify, request
 
-from app import app
+from app import app, smtp
 from app.repository import get_all_songs, set_vote
 from app.validators import validate_vote
 
@@ -39,13 +42,38 @@ def handle_vote() -> (str, int):
     except Exception as error:
         return jsonify({"error": f"invalid vote: {str(error)}"}), HTTPStatus.BAD_REQUEST
 
-    # send_validation_code(vote["email"], v.validation)
+    send_validation_code(vote["email"], v.validation)
 
     return "", HTTPStatus.CREATED
 
 
+@app.route("/validate", methods=["GET"])
+def validate_vote_code() -> (str, int):
+    return "not implemented", HTTPStatus.NOT_IMPLEMENTED
+
+
 def send_validation_code(email: str, code: str) -> None:
-    s = smtplib.SMTP(host="smtp.gmail.com", port=587)
-    s.starttls()
-    s.login("email", "pass")
-    s.send_message(msg=f"Here's your validation code: {code}", from_addr="eurovision.context@oracle.com", to_addrs=[email])
+    sender_address = "noreply@oracle.com"
+
+    # Setup the MIME
+    message = MIMEMultipart()
+    message["From"] = sender_address
+    message["To"] = email
+    message["Subject"] = "Verify your Eurovision Context vote"
+
+    host = os.environ.get("PUBLIC_BACKEND_HOST", "http://localhost:5000")
+
+    # The body and the attachments for the mail
+    body = f"""
+Thanks for submitting your vote for Eurovision Context 2020.
+Please validate it by clicking on the link below:
+{host}/validate?email={email}&code={code}
+
+Yours,
+The Eurovision Context Team
+"""
+    message.attach(MIMEText(body, "plain"))
+    
+    # Send the mail
+    text = message.as_string()
+    smtp.sendmail(sender_address, email, text)
