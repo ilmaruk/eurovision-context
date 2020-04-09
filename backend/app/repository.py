@@ -50,7 +50,6 @@ def get_results() -> typing.List:
                 }
             totals[id]["points"] += _points_map[vs.position]
 
-    # results = [{"song": {"id": i}, "points": points} for i, points in totals.items()]
     return sorted(totals.values(), key=lambda r: r["points"], reverse=True)
 
 
