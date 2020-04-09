@@ -24,6 +24,9 @@ const Table = () => {
     const [list, setList] = React.useState(items);
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
 
+
+    // onDragStart fires when an element
+    // starts being dragged
     const onDragStart = (event) => {
         const initialPosition = Number(event.currentTarget.dataset.position);
 
@@ -36,17 +39,29 @@ const Table = () => {
 
 
         // Note: this is only for Firefox.
+        // Without it, the DnD won't work.
+        // But we are not using it.
         event.dataTransfer.setData("text/html", '');
     }
 
+    // onDragOver fires when an element being dragged
+    // enters a droppable area.
+    // In this case, any of the items on the list
     const onDragOver = (event) => {
 
+        // in order for the onDrop
+        // event to fire, we have
+        // to cancel out this one
         event.preventDefault();
 
         let newList = dragAndDrop.originalOrder;
 
+        // index of the item being dragged
         const draggedFrom = dragAndDrop.draggedFrom;
+
+        // index of the droppable area being hovered
         const draggedTo = Number(event.currentTarget.dataset.position);
+
         const itemDragged = newList[draggedFrom];
         const remainingItems = newList.filter((item, index) => index !== draggedFrom);
 
@@ -67,7 +82,9 @@ const Table = () => {
     }
 
     const onDrop = (event) => {
+
         setList(dragAndDrop.updatedOrder);
+
         setDragAndDrop({
             ...dragAndDrop,
             draggedFrom: null,
@@ -96,31 +113,44 @@ const Table = () => {
     }, [list])
 
     return(
-        <section>
-            <ul>
-                {list.map( (item, index) => {
-                    return(
-                        <li
-                            key={index}
-                            data-position={index}
-                            draggable
-                            onDragStart={onDragStart}
-                            onDragOver={onDragOver}
-                            onDrop={onDrop}
-                            onDragLeave={onDragLeave}
-                            className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
-                        >
-                            <p>{item.title}</p>
-                            <p>{item.country}</p>
-                            <p>{item.artist}</p>
-                            <p>{item.link}</p>
-                            <i className="fas fa-arrows-alt-v"></i>
+        <>
+            <div className="table">
+                <section>
+                    <ul>
+                        <li className="places">
+                            {items.map((value, index) => {
+                                return <span key={index}>{value.number}</span>
+                            })}
                         </li>
-                    )
-                })}
+                    </ul>
+                </section>
+                <section>
+                    <ul>
+                        {list.map( (item, index) => {
+                            return(
+                                <li
+                                    key={index}
+                                    data-position={index}
+                                    draggable
+                                    onDragStart={onDragStart}
+                                    onDragOver={onDragOver}
+                                    onDrop={onDrop}
+                                    onDragLeave={onDragLeave}
+                                    className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
+                                >
+                                    <p>{item.title}</p>
+                                    <p>{item.country}</p>
+                                    <p>{item.artist}</p>
+                                    <p>{item.link}</p>
+                                    <i className="fas fa-arrows-alt-v"></i>
+                                </li>
+                            )
+                        })}
 
-            </ul>
-        </section>
+                    </ul>
+                </section>
+            </div>
+        </>
     )
 };
 

@@ -3,7 +3,8 @@ $blue: #687bf7;
 $lightblue: #72d9ef;
 $cyan: #79e7eb;
 
-
+.table {
+  display: flex;
   section {
     max-width: 100%;
     margin: 10vh auto 0;
@@ -12,8 +13,14 @@ $cyan: #79e7eb;
     border-radius: 0.5em;
     box-shadow: 4px 4px 50px rgba($blue, 0);
     transition: box-shadow 100ms linear;
+
     &:hover {
       box-shadow: 4px 4px 50px rgba($blue, 0.6);
+    }
+
+    .places {
+      display: flex;
+      flex-direction: column;
     }
   }
 
@@ -94,6 +101,7 @@ $cyan: #79e7eb;
       }
     }
   }
+}
 
 
 @keyframes fadeIn {

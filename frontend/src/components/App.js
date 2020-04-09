@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="app">
       <Header/>
-      dfs
         <div className="container">
             <Table />
         </div>
