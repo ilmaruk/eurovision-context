@@ -1,13 +1,12 @@
-FROM node:12
-
-COPY frontend/ /app
+FROM node:12-alpine
 
 WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm rebuild node-sass
+COPY frontend/package*.json ./
 RUN npm install
 RUN npm install react-scripts -g
 
+COPY frontend ./
 CMD ["npm", "start"]
