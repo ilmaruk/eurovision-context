@@ -14,3 +14,8 @@
 |  8 | ![ROM](https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flag_of_Romania.svg/23px-Flag_of_Romania.svg.png) Romania        | Roxen               | Alcohol You                 | [link](https://www.youtube.com/watch?v=TmqSU3v_Mtw&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=7) |
 |  9 | ![SPA](https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/23px-Flag_of_Spain.svg.png) Spain          | Blas Cantó          | Universo                    | [link](https://www.youtube.com/watch?v=zuDdex1st-Y&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=38) |
 | 10 | ![GBR](https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/23px-Flag_of_the_United_Kingdom.svg.png) United Kingdom | James Newman        | My Last Breath              | [link](https://www.youtube.com/watch?v=6iS-lV909T4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=36) |
+
+## Resources
+
+* Dockerising a React App<br/>https://mherman.org/blog/dockerizing-a-react-app/
+* SQLAlchemy and Alembic<br/>https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
