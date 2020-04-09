@@ -44,11 +44,14 @@ def get_results() -> typing.List:
         for vs in vote.songs:  # type: VoteSong
             id = vs.song_id
             if id not in totals.keys():
-                totals[id] = 0
-            totals[id] += _points_map[vs.position]
+                totals[id] = {
+                    "song": vs.song.serialise(),
+                    "points": 0,
+                }
+            totals[id]["points"] += _points_map[vs.position]
 
-    results = [{"song": {"id": i}, "points": points} for i, points in totals.items()]
-    return sorted(results, key=lambda r: r["points"], reverse=True)
+    # results = [{"song": {"id": i}, "points": points} for i, points in totals.items()]
+    return sorted(totals.values(), key=lambda r: r["points"], reverse=True)
 
 
 _points_map = {

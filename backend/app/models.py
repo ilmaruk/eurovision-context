@@ -39,8 +39,10 @@ class Vote(db.Model):
 
 class VoteSong(db.Model):
     vote_id = db.Column(db.Integer, db.ForeignKey("vote.id"), nullable=False, index=True)
-    song_id = db.Column(db.Integer, nullable=False, index=True)
+    song_id = db.Column(db.Integer, db.ForeignKey("song.id"), nullable=False, index=True)
     position = db.Column(db.Integer, nullable=False)
+
+    song = db.relationship("Song", backref="vote_song")
 
     __table_args__ = (
         PrimaryKeyConstraint("vote_id", "song_id", "position"),
