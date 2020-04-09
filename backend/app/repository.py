@@ -17,9 +17,9 @@ def get_song(id: str) -> Song:
     return Song.query.get(id)
 
 
-def set_vote(vote: typing.Dict) -> typing.Optional[str]:
+def set_vote(vote: typing.Dict) -> Vote:
+    v = Vote(email=vote["email"], validation=str(uuid.uuid4()))
     try:
-        v = Vote(email=vote["email"], validation=str(uuid.uuid4()))
         db.session.add(v)
         db.session.flush()
 
@@ -30,6 +30,6 @@ def set_vote(vote: typing.Dict) -> typing.Optional[str]:
         db.session.commit()
     except Exception as error:
         db.session.rollback()
-        return str(error)
+        raise
 
-    return None
+    return v
