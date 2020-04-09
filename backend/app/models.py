@@ -15,7 +15,6 @@ class Song(db.Model):
 
     def serialise(self) -> typing.Dict:
         return {
-            "id": self.id,
             "title": self.title,
             "artist": self.artist,
             "country": self.country,
