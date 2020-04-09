@@ -1,6 +1,7 @@
 # Python
-venv/
+**/venv/
 *.pyc
+**/__pycache__/
 
 # IDEs
 .idea/
