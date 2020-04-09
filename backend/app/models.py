@@ -31,18 +31,20 @@ class Vote(db.Model):
     validation = db.Column(db.String(36), nullable=False, unique=True)
     valid = db.Column(db.Boolean(), default=False)
 
+    songs = db.relationship("VoteSong", backref="vote")
+
     def __repr__(self) -> str:
         return '<Vote email:{} valid:{}>'.format(self.email, self.valid)
 
 
 class VoteSong(db.Model):
-    vote = db.Column(db.Integer, nullable=False)
-    song = db.Column(db.Integer, nullable=False)
+    vote_id = db.Column(db.Integer, db.ForeignKey("vote.id"), nullable=False, index=True)
+    song_id = db.Column(db.Integer, nullable=False, index=True)
     position = db.Column(db.Integer, nullable=False)
 
     __table_args__ = (
-        PrimaryKeyConstraint("vote", "song", "position"),
+        PrimaryKeyConstraint("vote_id", "song_id", "position"),
     )
 
     def __repr__(self) -> str:
-        return '<VoteSong vote:{} song:{} position:{}>'.format(self.vote, self.song, self.position)
+        return '<VoteSong vote_id:{} song_id:{} position:{}>'.format(self.vote_id, self.song_id, self.position)
