@@ -6,7 +6,7 @@ from http import HTTPStatus
 
 from flask import jsonify, request
 
-from app import app, smtp
+from app import app, smtp, SKIP_VOTE_VALIDATION
 from app.repository import get_all_songs, set_vote, get_results, set_vote_valid
 from app.validators import validate_vote
 
@@ -38,11 +38,12 @@ def handle_vote() -> (str, int):
         return jsonify({"error": f"invalid payload: {error}"}), HTTPStatus.BAD_REQUEST
 
     try:
-        v = set_vote(vote)
+        v = set_vote(vote, SKIP_VOTE_VALIDATION)
     except Exception as error:
         return jsonify({"error": f"invalid vote: {str(error)}"}), HTTPStatus.BAD_REQUEST
 
-    # send_validation_code(vote["email"], v.validation)
+    if not SKIP_VOTE_VALIDATION:
+        send_validation_code(vote["email"], v.validation)
 
     return jsonify(""), HTTPStatus.CREATED
 

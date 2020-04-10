@@ -19,4 +19,6 @@ if smtp_host is not None:
     smtp.starttls()
     smtp.login(os.environ.get("SMTP_USER", ""), os.environ.get("SMTP_PASS", ""))
 
+SKIP_VOTE_VALIDATION = os.environ.get("SKIP_VOTE_VALIDATION", "false") == "true"
+
 from app import routes, models

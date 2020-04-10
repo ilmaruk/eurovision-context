@@ -18,8 +18,8 @@ def get_song(id: str) -> Song:
     return Song.query.get(id)
 
 
-def set_vote(vote: typing.Dict) -> Vote:
-    v = Vote(email=vote["email"], validation=str(uuid.uuid4()))
+def set_vote(vote: typing.Dict, skip_validation: bool = False) -> Vote:
+    v = Vote(email=vote["email"], validation=str(uuid.uuid4()), valid=skip_validation)
     try:
         db.session.add(v)
         db.session.flush()
