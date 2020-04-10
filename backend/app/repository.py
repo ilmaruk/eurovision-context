@@ -53,6 +53,16 @@ def get_results() -> typing.List:
     return sorted(totals.values(), key=lambda r: r["points"], reverse=True)
 
 
+def set_vote_valid(email: str, code: str) -> bool:
+    v = Vote.query.filter(Vote.email == email).filter(Vote.validation == code).first()  # type: Vote
+    if v is None:
+        return False
+
+    v.valid = True
+    db.session.add(v)
+    db.session.commit()
+
+
 _points_map = {
     1: 12,
     2: 10,

@@ -7,7 +7,7 @@ from http import HTTPStatus
 from flask import jsonify, request
 
 from app import app, smtp
-from app.repository import get_all_songs, set_vote, get_results
+from app.repository import get_all_songs, set_vote, get_results, set_vote_valid
 from app.validators import validate_vote
 
 
@@ -44,7 +44,7 @@ def handle_vote() -> (str, int):
 
     # send_validation_code(vote["email"], v.validation)
 
-    return "", HTTPStatus.CREATED
+    return jsonify(""), HTTPStatus.CREATED
 
 
 @app.route("/results", methods=["GET"])
@@ -55,7 +55,9 @@ def list_results() -> (str, int):
 
 @app.route("/validate", methods=["GET"])
 def validate_vote_code() -> (str, int):
-    return "not implemented", HTTPStatus.NOT_IMPLEMENTED
+    if not set_vote_valid(request.args.get("email"), request.args.get("code")):
+        return "", HTTPStatus.UNAUTHORIZED
+    return jsonify(""), HTTPStatus.OK
 
 
 def send_validation_code(email: str, code: str) -> None:
