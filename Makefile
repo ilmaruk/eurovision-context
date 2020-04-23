@@ -12,7 +12,7 @@ stop:
 
 .PHONY: restart
 
-restart: restart-backend restart-frontend
+restart: stop start
 
 ########################################################################################################################
 # Backend
@@ -22,10 +22,6 @@ restart: restart-backend restart-frontend
 start-backend:
 	docker-compose up -d backend
 
-.PHONY: restart-backend
-
-restart-backend: stop start-backend
-
 ########################################################################################################################
 # Frontend
 
@@ -34,10 +30,6 @@ restart-backend: stop start-backend
 start-frontend:
 	docker-compose up -d frontend
 
-.PHONY: restart-frontend
-
-restart-frontend: stop start-frontend
-
 ########################################################################################################################
 # Utils
 
@@ -45,6 +37,13 @@ restart-frontend: stop start-frontend
 
 backend-shell:
 	docker-compose exec backend bash
+
+.PHONY: frontend-shell
+
+frontend-shell:
+	docker-compose exec frontend sh
+
+.PHONY: migrate
 
 migrate:
 	docker-compose up --build migrator

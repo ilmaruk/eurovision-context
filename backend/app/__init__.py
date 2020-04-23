@@ -12,11 +12,16 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+SKIP_VOTE_VALIDATION = os.environ.get("SKIP_VOTE_VALIDATION", "false") == "true"
+SMTP_HOST = os.environ.get("SMTP_HOST")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_USER = os.environ.get("SMTP_USER", "")
+SMTP_PASS = os.environ.get("SMTP_PASS", "")
+
 smtp = None
-smtp_host = os.environ.get("SMTP_HOST")
-if smtp_host is not None:
-    smtp = smtplib.SMTP(host=smtp_host, port=int(os.environ.get("SMTP_PORT", "587")))
+if SMTP_HOST is not None:
+    smtp = smtplib.SMTP(host=SMTP_HOST, port=SMTP_PORT)
     smtp.starttls()
-    smtp.login(os.environ.get("SMTP_USER", ""), os.environ.get("SMTP_PASS", ""))
+    smtp.login(SMTP_USER, SMTP_PASS)
 
 from app import routes, models
