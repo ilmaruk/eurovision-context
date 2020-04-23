@@ -25,6 +25,5 @@ services:
       - upgrade
 
   mysql:
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
+    image: mysql:5
     restart: always
