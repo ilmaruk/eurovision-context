@@ -1,8 +1,29 @@
 version: "3.7"
+
 services:
   frontend:
     build:
       dockerfile: docker/frontend.dockerfile
       context: .
-    ports:
-      - "3000:3000"
+
+  backend:
+    build:
+      dockerfile: docker/backend.dockerfile
+      context: .
+    depends_on:
+      - mysql
+
+  migrator:
+    build:
+      dockerfile: docker/backend.dockerfile
+      context: .
+    depends_on:
+      - mysql
+    command:
+      - flask
+      - db
+      - upgrade
+
+  mysql:
+    image: mysql:5
+    restart: always
