@@ -25,7 +25,7 @@ def set_vote(vote: typing.Dict, skip_validation: bool = False) -> Vote:
         db.session.flush()
 
         for index, song in enumerate(vote["songs"]):
-            s = VoteSong(vote_id=v.id, song_id=int(song), position=index+1)
+            s = VoteSong(vote_id=v.id, song_id=song["id"], position=index+1)
             db.session.add(s)
 
         db.session.commit()
