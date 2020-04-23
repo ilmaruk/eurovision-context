@@ -4,11 +4,11 @@ import { mockedData } from '../mockedData/mockedApi'
 import useAppContext from '../hooks/useAppContext';
 
 const items = [
-    { "number": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
-    { "number": "2", "artist": "b", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "no"},
-    { "number": "3", "artist": "c", "country": "Spain", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31","title": "sí"},
-    { "number": "4", "artist": "d", "country": "Italy", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "fdsa"},
-    { "number": "5", "artist": "Ve", "country": "whatever", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Bfdsa"},
+    { "id": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
+    { "id": "2", "artist": "b", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "no"},
+    { "id": "3", "artist": "c", "country": "Spain", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31","title": "sí"},
+    { "id": "4", "artist": "d", "country": "Italy", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "fdsa"},
+    { "id": "5", "artist": "Ve", "country": "whatever", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Bfdsa"},
 ]
 
 
@@ -23,6 +23,7 @@ const initialDnDState = {
 const Table = () => {
 
     const [list, setList] = React.useState(items);
+    const [email, setEmail] = React.useState('');
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
     const { setError } = useAppContext();
 
@@ -38,7 +39,6 @@ const Table = () => {
             isDragging: true,
             originalOrder: list
         });
-
 
         // Note: this is only for Firefox.
         // Without it, the DnD won't work.
@@ -93,8 +93,6 @@ const Table = () => {
             isDragging: false
         });
     };
-
-
     const onDragLeave = () => {
         setDragAndDrop({
             ...dragAndDrop,
@@ -106,10 +104,12 @@ const Table = () => {
     const handleVote = async () => {
         setError(null);
         console.log(list);
+        console.log(email);
         try {
             await postVote({
                 jobQuery: {
-                    list: list
+                    list: list,
+                    email: email
                 },
             });
         } catch (e) {
@@ -127,6 +127,10 @@ const Table = () => {
         console.log("List updated!");
     }, [list])
 
+    const handleChange = e => {
+        setEmail(e.target.value);
+    }
+
     return(
         <>
             <div className="table">
@@ -134,7 +138,7 @@ const Table = () => {
                     <ul>
                         <li className="places">
                             {items.map((value, index) => {
-                                return <span key={index}>{value.number}</span>
+                                return <span key={index}>{index+1}</span>
                             })}
                         </li>
                     </ul>
@@ -144,10 +148,10 @@ const Table = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Title    </th>
-                                    <th>Country    </th>
-                                    <th>Artist    </th>
-                                    <th>Link    </th>
+                                    <th>Title</th>
+                                    <th>Country</th>
+                                    <th>Artist</th>
+                                    <th>Link</th>
                                 </tr>
                             </thead>
                             {list.map( (item, index) => {
@@ -156,7 +160,7 @@ const Table = () => {
                                         <tr
                                             key={index}
                                             data-position={index}
-                                            value={index}
+                                            id={item.id}
                                             draggable
                                             onDragStart={onDragStart}
                                             onDragOver={onDragOver}
@@ -164,15 +168,18 @@ const Table = () => {
                                             onDragLeave={onDragLeave}
                                             className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "") + index}
                                         >
-                                            <td>{item.title}    </td>
-                                            <td>{item.country}    </td>
-                                            <td>{item.artist}    </td>
-                                            <td>{item.link}    </td>
+                                            <td>{item.title}</td>
+                                            <td>{item.country}</td>
+                                            <td>{item.artist}</td>
+                                            <td>{item.link}</td>
                                         </tr>
                                     </tbody>
                                 )
                             })}
                         </table>
+                        <div className="">
+                            <input className="" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
+                        </div>
                         <div>
                             <button type="button" className="button is-link" onClick={handleVote}>
                                 VOTE

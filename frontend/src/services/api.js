@@ -14,7 +14,7 @@ const getAllSongs = () =>
 
 const postVote = list =>
     fetch(`${API_URL}/vote`, {
-        method: 'put',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
         },
