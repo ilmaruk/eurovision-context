@@ -1,6 +1,7 @@
 import React  from 'react'
-import { getAllSongs } from "../services/api";
+import { getAllSongs, postVote } from "../services/api";
 import { mockedData } from '../mockedData/mockedApi'
+import useAppContext from '../hooks/useAppContext';
 
 const items = [
     { "number": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
@@ -23,6 +24,7 @@ const Table = () => {
 
     const [list, setList] = React.useState(items);
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
+    const { setError } = useAppContext();
 
 
     // onDragStart fires when an element
@@ -81,17 +83,16 @@ const Table = () => {
 
     }
 
+
     const onDrop = (event) => {
-
         setList(dragAndDrop.updatedOrder);
-
         setDragAndDrop({
             ...dragAndDrop,
             draggedFrom: null,
             draggedTo: null,
             isDragging: false
         });
-    }
+    };
 
 
     const onDragLeave = () => {
@@ -100,7 +101,21 @@ const Table = () => {
             draggedTo: null
         });
 
-    }
+    };
+
+    const handleVote = async () => {
+        setError(null);
+        console.log(list);
+        try {
+            await postVote({
+                jobQuery: {
+                    list: list
+                },
+            });
+        } catch (e) {
+            setError(e.message);
+        }
+    };
 
     // Not needed, just for logging purposes:
     React.useEffect( ()=>{
@@ -125,29 +140,45 @@ const Table = () => {
                     </ul>
                 </section>
                 <section>
-                    <ul>
-                        {list.map( (item, index) => {
-                            return(
-                                <li
-                                    key={index}
-                                    data-position={index}
-                                    draggable
-                                    onDragStart={onDragStart}
-                                    onDragOver={onDragOver}
-                                    onDrop={onDrop}
-                                    onDragLeave={onDragLeave}
-                                    className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
-                                >
-                                    <p>{item.title}</p>
-                                    <p>{item.country}</p>
-                                    <p>{item.artist}</p>
-                                    <p>{item.link}</p>
-                                    <i className="fas fa-arrows-alt-v"></i>
-                                </li>
-                            )
-                        })}
-
-                    </ul>
+                    <form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title    </th>
+                                    <th>Country    </th>
+                                    <th>Artist    </th>
+                                    <th>Link    </th>
+                                </tr>
+                            </thead>
+                            {list.map( (item, index) => {
+                                return(
+                                    <tbody key={`tbody-${index}`}>
+                                        <tr
+                                            key={index}
+                                            data-position={index}
+                                            value={index}
+                                            draggable
+                                            onDragStart={onDragStart}
+                                            onDragOver={onDragOver}
+                                            onDrop={onDrop}
+                                            onDragLeave={onDragLeave}
+                                            className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "") + index}
+                                        >
+                                            <td>{item.title}    </td>
+                                            <td>{item.country}    </td>
+                                            <td>{item.artist}    </td>
+                                            <td>{item.link}    </td>
+                                        </tr>
+                                    </tbody>
+                                )
+                            })}
+                        </table>
+                        <div>
+                            <button type="button" className="button is-link" onClick={handleVote}>
+                                VOTE
+                            </button>
+                        </div>
+                    </form>
                 </section>
             </div>
         </>

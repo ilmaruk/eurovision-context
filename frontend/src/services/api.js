@@ -12,7 +12,19 @@ const getAllSongs = () =>
         .then(response => response.data)
         .catch(error => error);
 
+const postVote = list =>
+    fetch(`${API_URL}/vote`, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(list),
+    })
+        .then(response => response.json())
+        .then(response => response)
+        .catch(error => error);
 
 export {
-    getAllSongs
+    getAllSongs,
+    postVote
 };
