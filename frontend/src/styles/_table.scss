@@ -21,6 +21,15 @@ $cyan: #79e7eb;
     .places {
       display: flex;
       flex-direction: column;
+
+       > span:first-of-type {
+        color: #363636;
+        border: 1px solid #dbdbdb;
+        border-width: 0 0 2px;
+        padding: 0.5em 0.75em;
+        vertical-align: top;
+        font-weight: 600;
+      }
     }
   }
 

@@ -137,6 +137,7 @@ const Table = () => {
                 <section>
                     <ul>
                         <li className="places">
+                            <span>Place</span>
                             {items.map((value, index) => {
                                 return <span key={index}>{index+1}</span>
                             })}
@@ -178,7 +179,7 @@ const Table = () => {
                             })}
                         </table>
                         <div className="">
-                            <input className="" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
+                            <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
                         </div>
                         <div>
                             <button type="button" className="button is-link" onClick={handleVote}>

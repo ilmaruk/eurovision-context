@@ -1,11 +1,16 @@
 import React  from 'react'
+import logo from '../assets/eurovision-logo.svg'
 const Header = () => {
 
     return (
         <>
-            <div className="navbar">
-                EUROVISION-CONTEXT 2020
-            </div>
+            <nav className="navbar">
+                <a href="/" className="navbar__logo">
+                    <img src={logo}
+                         alt="Logo"/>
+                </a>
+                <div>EUROVISION-CONTEXT 2020</div>
+            </nav>
         </>
     )
 }
