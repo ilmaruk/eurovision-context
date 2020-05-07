@@ -5,6 +5,10 @@
 
 start: start-backend start-frontend
 
+.PHONY: start-production
+
+start-production: start-backend start-frontend start-nginx
+
 .PHONY: stop
 
 stop:
@@ -13,6 +17,14 @@ stop:
 .PHONY: restart
 
 restart: stop start
+
+########################################################################################################################
+# Nginx
+
+.PHONY: start-nginx
+
+start-nginx:
+	docker-compose up -d nginx
 
 ########################################################################################################################
 # Backend

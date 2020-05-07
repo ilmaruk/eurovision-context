@@ -1,12 +1,20 @@
 version: "3.7"
 
 services:
+  nginx:
+    container_name: evc_nginx
+    image: nginx
+    volumes:
+      - "${PWD}/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+
   frontend:
+    container_name: evc_front
     build:
       dockerfile: docker/frontend.dockerfile
       context: .
 
   backend:
+    container_name: evc_back
     build:
       dockerfile: docker/backend.dockerfile
       context: .
@@ -26,5 +34,6 @@ services:
       - upgrade
 
   mysql:
+    container_name: evc_mysql
     image: mysql:5
     restart: always
