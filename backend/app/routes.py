@@ -94,3 +94,10 @@ The Eurovision Context Team
     # Send the mail
     text = message.as_string()
     smtp.sendmail(sender_address, email, text)
+
+
+@app.after_request
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    return response
