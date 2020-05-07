@@ -1,16 +1,7 @@
-import React  from 'react'
+import React, {useEffect} from 'react'
 import { getAllSongs, postVote } from "../services/api";
 import { mockedData } from '../mockedData/mockedApi'
 import useAppContext from '../hooks/useAppContext';
-
-const items = [
-    { "id": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
-    { "id": "2", "artist": "b", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "no"},
-    { "id": "3", "artist": "c", "country": "Spain", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31","title": "sí"},
-    { "id": "4", "artist": "d", "country": "Italy", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "fdsa"},
-    { "id": "5", "artist": "Ve", "country": "whatever", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Bfdsa"},
-]
-
 
 const initialDnDState = {
     draggedFrom: null,
@@ -18,14 +9,28 @@ const initialDnDState = {
     isDragging: false,
     originalOrder: [],
     updatedOrder: []
-}
+};
+
+const items = [
+    { "id": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
+    { "id": "2", "artist": "b", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "no"},
+    { "id": "3", "artist": "c", "country": "Spain", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31","title": "sí"},
+    { "id": "4", "artist": "d", "country": "Italy", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "fdsa"},
+    { "id": "5", "artist": "Ve", "country": "whatever", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Bfdsa"},
+];
 
 const Table = () => {
 
-    const [list, setList] = React.useState(items);
+    const [list, setList] = React.useState([]);
     const [email, setEmail] = React.useState('');
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
     const { setError } = useAppContext();
+
+    useEffect(() => {
+        getAllSongs().then(songs => {
+            console.log(songs);
+        } );
+    }, []);
 
     const onDragStart = (event) => {
         const initialPosition = Number(event.currentTarget.dataset.position);
@@ -114,7 +119,7 @@ const Table = () => {
                     <ul>
                         <li className="places">
                             <span>Place</span>
-                            {items.map((value, index) => {
+                            {list.map((value, index) => {
                                 return <span key={index}>{index+1}</span>
                             })}
                         </li>

@@ -12,7 +12,8 @@ services:
       context: .
     depends_on:
       - mysql
-
+    ports:
+      - 5000:80
   migrator:
     build:
       dockerfile: docker/backend.dockerfile

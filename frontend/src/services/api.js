@@ -1,8 +1,8 @@
-const API_URL = `/api`;
+const API_URL = `http://localhost:5000`;
 
 
-const getAllSongs = () =>
-    fetch(`${API_URL}/allSongs`, {
+const getAllSongs = () =>{
+    return fetch(`${API_URL}/songs`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
@@ -11,9 +11,11 @@ const getAllSongs = () =>
         .then(response => response.json())
         .then(response => response.data)
         .catch(error => error);
+}
 
-const postVote = list =>
-    fetch(`${API_URL}/vote`, {
+
+const postVote = list => {
+    return fetch(`${API_URL}/vote`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -23,6 +25,8 @@ const postVote = list =>
         .then(response => response.json())
         .then(response => response)
         .catch(error => error);
+}
+
 
 export {
     getAllSongs,
