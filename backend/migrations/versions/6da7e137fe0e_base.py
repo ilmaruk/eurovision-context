@@ -48,16 +48,16 @@ def upgrade():
 
     op.bulk_insert(songs,
                    [
-                       {"title": "Sandro", "artist": "Running", "country": "Cyprus", "link": "https://www.youtube.com/watch?v=Jl_qEw_4OK0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=21"},
-                       {"title": "Tom Leeb", "artist": "Mon alliée (The Best in Me)", "country": "France", "link": "https://www.youtube.com/watch?v=D02Xlo_LfRU&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=35"},
-                       {"title": "Ben Dolic", "artist": "Violent Thing", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31"},
-                       {"title": "Stefania", "artist": "Supergirl", "country": "Greece", "link": "https://www.youtube.com/watch?v=dJxCINWp_j0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=10"},
-                       {"title": "Daði og Gagnamagnið", "artist": "Think About Things", "country": "Iceland", "link": "https://www.youtube.com/watch?v=1HU7ocv3S2o&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=18"},
-                       {"title": "Lesley Roy", "artist": "Story of My Life", "country": "Ireland", "link": "https://www.youtube.com/watch?v=HLgE0Ayl5Hc&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=24"},
-                       {"title": "Diodato", "artist": "Fai Rumore", "country": "Italy", "link": "https://www.youtube.com/watch?v=TA57rugucwk&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=3"},
-                       {"title": "Roxen", "artist": "Alcohol You", "country": "Romania", "link": "https://www.youtube.com/watch?v=TmqSU3v_Mtw&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=7"},
-                       {"title": "Blas Cantó", "artist": "Universo", "country": "Spain", "link": "https://www.youtube.com/watch?v=zuDdex1st-Y&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=38"},
-                       {"title": "James Newman", "artist": "My Last Breath", "country": "United Kingdom", "link": "https://www.youtube.com/watch?v=6iS-lV909T4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=36"},
+                       {"artist": "Sandro", "title": "Running", "country": "Cyprus", "link": "https://www.youtube.com/watch?v=Jl_qEw_4OK0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=21"},
+                       {"artist": "Tom Leeb", "title": "Mon alliée (The Best in Me)", "country": "France", "link": "https://www.youtube.com/watch?v=D02Xlo_LfRU&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=35"},
+                       {"artist": "Ben Dolic", "title": "Violent Thing", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31"},
+                       {"artist": "Stefania", "title": "Supergirl", "country": "Greece", "link": "https://www.youtube.com/watch?v=dJxCINWp_j0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=10"},
+                       {"artist": "Daði og Gagnamagnið", "title": "Think About Things", "country": "Iceland", "link": "https://www.youtube.com/watch?v=1HU7ocv3S2o&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=18"},
+                       {"artist": "Lesley Roy", "title": "Story of My Life", "country": "Ireland", "link": "https://www.youtube.com/watch?v=HLgE0Ayl5Hc&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=24"},
+                       {"artist": "Diodato", "title": "Fai Rumore", "country": "Italy", "link": "https://www.youtube.com/watch?v=TA57rugucwk&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=3"},
+                       {"artist": "Roxen", "title": "Alcohol You", "country": "Romania", "link": "https://www.youtube.com/watch?v=TmqSU3v_Mtw&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=7"},
+                       {"artist": "Blas Cantó", "title": "Universo", "country": "Spain", "link": "https://www.youtube.com/watch?v=zuDdex1st-Y&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=38"},
+                       {"artist": "James Newman", "title": "My Last Breath", "country": "United Kingdom", "link": "https://www.youtube.com/watch?v=6iS-lV909T4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=36"},
                    ])
 
 
