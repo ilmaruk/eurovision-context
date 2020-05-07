@@ -1,8 +1,6 @@
 import typing
 from email.utils import parseaddr
 
-from app.repository import count_all_songs, get_song
-
 
 def validate_vote(vote: typing.Dict) -> typing.Optional[str]:
     try:

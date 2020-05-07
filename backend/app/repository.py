@@ -43,8 +43,11 @@ def get_results(limit: int) -> typing.Dict:
     totals = {}
 
     votes = Vote.query.filter(Vote.valid).order_by(Vote.id.asc())
+    total_votes = votes.count()
+    used_votes = total_votes
     if limit > 0:
-        votes = votes.limit(limit).all()
+        votes = votes[:limit]
+        used_votes = limit
     for vote in votes:  # type: Vote
         for vs in vote.songs:  # type: VoteSong
             id = vs.song_id
@@ -58,6 +61,8 @@ def get_results(limit: int) -> typing.Dict:
     data = {
         "results": sorted(totals.values(), key=lambda r: r["points"], reverse=True),
         "last": votes[-1].email,
+        "votes_total": total_votes,
+        "votes_used": used_votes,
     }
 
     return data
