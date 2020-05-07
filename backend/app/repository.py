@@ -36,10 +36,15 @@ def set_vote(vote: typing.Dict, skip_validation: bool = False) -> Vote:
     return v
 
 
-def get_results() -> typing.List:
+def get_results(limit: int) -> typing.Dict:
+    """Fetch votes and build the results table.
+    The number of votes to fetch can be limited via the 'l' query parameter.
+    """
     totals = {}
 
-    votes = Vote.query.filter(Vote.valid)  # type: typing.List[Vote]
+    votes = Vote.query.filter(Vote.valid).order_by(Vote.id.asc())
+    if limit > 0:
+        votes = votes.limit(limit).all()
     for vote in votes:  # type: Vote
         for vs in vote.songs:  # type: VoteSong
             id = vs.song_id
@@ -50,7 +55,12 @@ def get_results() -> typing.List:
                 }
             totals[id]["points"] += _points_map[vs.position]
 
-    return sorted(totals.values(), key=lambda r: r["points"], reverse=True)
+    data = {
+        "results": sorted(totals.values(), key=lambda r: r["points"], reverse=True),
+        "last": votes[-1].email,
+    }
+
+    return data
 
 
 def set_vote_valid(email: str, code: str) -> bool:
