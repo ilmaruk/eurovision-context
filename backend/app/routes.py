@@ -50,7 +50,15 @@ def handle_vote() -> (str, int):
 
 @app.route("/results", methods=["GET"])
 def list_results() -> (str, int):
-    results = get_results()
+    try:
+        limit = int(request.args.get("l", 0))
+    except ValueError:
+        # If the limit is not an integer, just ignore it
+        limit = 0
+    results = get_results(limit)
+    if limit > 0:
+        results["next"] = f"{request.base_url}?l={limit+1}"
+
     return jsonify(results), HTTPStatus.CREATED
 
 
