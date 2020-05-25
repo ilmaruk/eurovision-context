@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:5000`;
+const API_URL = `http://0.0.0.0:5000`;
 
 
 const getAllSongs = () =>{
@@ -9,7 +9,10 @@ const getAllSongs = () =>{
         },
     })
         .then(response => response.json())
-        .then(response => response.data)
+        .then(response => {
+            console.log(response);
+            return response;
+        })
         .catch(error => error);
 }
 

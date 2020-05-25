@@ -31,6 +31,7 @@ const Table = () => {
     useEffect(() => {
         getAllSongs().then(songs => {
             console.log(songs);
+            setList(songs);
         } );
     }, []);
 
