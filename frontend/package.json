@@ -1,5 +1,5 @@
 {
-  "name": "eurovision-context-ui-2",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +9,7 @@
     "hookrouter": "^1.2.3",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },

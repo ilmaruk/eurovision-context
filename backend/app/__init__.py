@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.config.from_object(Config)
-cors = CORS(app)
+cors = CORS(app, resources="*", allow_headers="*", origins="*")
 app.config["CORS_HEADERS"] = "Content-Type"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

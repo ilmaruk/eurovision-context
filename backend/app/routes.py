@@ -17,7 +17,7 @@ def index():
     return "Hello, World!"
 
 
-@app.route("/songs", methods=["GET"])
+@app.route("/songs", methods=["GET", "OPTIONS"])
 def list_songs() -> (str, int):
     """Return a JSON blob with the list of songs.
     """
@@ -98,6 +98,7 @@ The Eurovision Context Team
 
 @app.after_request
 def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST')
     return response
