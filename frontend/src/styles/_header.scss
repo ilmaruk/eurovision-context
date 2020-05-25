@@ -1,0 +1,23 @@
+//.header {
+//  display: flex;
+//  height: 3em;
+//  border-bottom: 3px solid grey;
+//}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  border-bottom: 3px solid grey;
+  &__logo {
+    display: flex;
+    img {
+      align-self: center;
+      width: 112px;
+      height: 28px;
+    }
+  }
+}
