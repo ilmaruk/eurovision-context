@@ -1,23 +1,6 @@
-// import React from 'react';
-// import Header from './components/Header'
-// import './styles/main.scss';
-// import Table from './components/Table'
-//
-// function App() {
-//   return (
-//     <div className="app">
-//       <Header/>
-//         <div className="container">
-//             <Table />
-//         </div>
-//     </div>
-//   );
-// }
-//
-// export default App;
-
 import React from 'react';
 import { useRedirect, useRoutes } from 'hookrouter';
+import './styles/main.scss';
 import Header from "./components/Header";
 import PageListView from './pages/ListView'
 import PageNotFound from './pages/NotFound'
@@ -26,19 +9,19 @@ import PageThankYou from './pages/ThankYou'
 import { AppProvider } from './state/AppContext';
 
 const routes = {
-    '/': () => <PageListView />,
+    '/vote': () => <PageListView />,
     '/thankyou': () => <PageThankYou />
 };
 
 const App = () => {
-    useRedirect('/', '/');
+    useRedirect('/', '/vote');
 
     const routeResult = useRoutes(routes);
 
     return (
         <AppProvider>
             <Header />
-            <div className="">
+            <div className="app">
                 {routeResult || <PageNotFound />}
             </div>
         </AppProvider>

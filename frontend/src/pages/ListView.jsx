@@ -4,10 +4,14 @@ import Table from '../components/Table'
 
 const ListView = () => {
 
+    useEffect(() => {
+        document.title = 'List of songs';
+    }, []);
+
     return (
         <>
             <div className="container">
-                <h1 className="title">List of Existing Jobs</h1>
+                <h1 className="title">List of Eurosongs</h1>
                 <Table
                 />
             </div>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 const ThankYouView = () => {
+    useEffect(() => {
+        document.title = 'Thank you';
+    }, []);
 
     return (
         <>

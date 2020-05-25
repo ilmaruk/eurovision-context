@@ -151,8 +151,10 @@ const Table = () => {
                             <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
                         </div>
                         <div>
-                            <button type="button" className="button is-link" onClick={handleVote}>
-                                VOTE
+                            <button type="button" className="button is-medium" onClick={handleVote}>
+                                <a href={'/thankyou'}>
+                                    VOTE
+                                </a>
                             </button>
                         </div>
                     </form>
