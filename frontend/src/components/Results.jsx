@@ -1,20 +1,32 @@
 import React, {useEffect} from 'react'
+import {getResults} from "../services/api";
 
 const ResultsList = () => {
-     const [songs, updateResults] = React.useState([]);
+    const [songs, updateResults] = React.useState([]);
 
-    useEffect(function effectFunction() {
-        async function fetchResults() {
-            const response = await fetch(
-                "http://0.0.0.0:5000/results"
-            );
-            const json = await response.json();
-            console.log(json.results);
-            updateResults(json.results);
-            console.log(songs);
+    useEffect(() => {
+        try {
+            getResults().then(results => {
+                updateResults(results.results);
+            });
+        } catch (e) {
+            console.log(e.message);
         }
-        fetchResults();
     }, []);
+
+    //load somehow fancy?
+    // useEffect(function effectFunction() {
+    //     async function fetchResults() {
+    //         const response = await fetch(
+    //             "http://0.0.0.0:5000/results"
+    //         );
+    //         const json = await response.json();
+    //         console.log(json.results);
+    //         updateResults(json.results);
+    //         console.log(songs);
+    //     }
+    //     fetchResults();
+    // }, []);
 
 
     return (
@@ -31,14 +43,12 @@ const ResultsList = () => {
                 {songs && songs.map( (item, index) => {
                     return(
                         <tbody key={`tbody-${index}`}>
-                        <tr
-                            key={index}
-                        >
-                            <td>{item.points}</td>
-                            <td>{item.song.title}</td>
-                            <td>{item.song.country}</td>
-                            <td>{item.song.artist}</td>
-                        </tr>
+                            <tr key={index}>
+                                <td>{item.points}</td>
+                                <td>{item.song.title}</td>
+                                <td>{item.song.country}</td>
+                                <td>{item.song.artist}</td>
+                            </tr>
                         </tbody>
                     )
                 })}
