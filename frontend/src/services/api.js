@@ -9,21 +9,19 @@ const getAllSongs = () =>{
         },
     })
         .then(response => response.json())
-        .then(response => {
-            console.log(response);
-            return response;
-        })
+        .then(response => response)
         .catch(error => error);
 }
 
 
-const postVote = list => {
+const postVote = vote => {
+    console.log(JSON.stringify(vote))
     return fetch(`${API_URL}/vote`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(list),
+        body: JSON.stringify(vote),
     })
         .then(response => response.json())
         .then(response => response)

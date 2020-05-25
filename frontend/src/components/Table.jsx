@@ -11,15 +11,6 @@ const initialDnDState = {
     updatedOrder: []
 };
 
-
-const items = [
-    { "id": "1", "artist": "Violent Thing", "country": "Iceland", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Ben"},
-    { "id": "2", "artist": "b", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "no"},
-    { "id": "3", "artist": "c", "country": "Spain", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31","title": "sí"},
-    { "id": "4", "artist": "d", "country": "Italy", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "fdsa"},
-    { "id": "5", "artist": "Ve", "country": "whatever", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31", "title": "Bfdsa"},
-];
-
 const Table = () => {
 
     const [list, setList] = React.useState([]);
@@ -30,7 +21,6 @@ const Table = () => {
 
     useEffect(() => {
         getAllSongs().then(songs => {
-            console.log(songs);
             setList(songs);
         } );
     }, []);
@@ -97,14 +87,10 @@ const Table = () => {
 
     const handleVote = async () => {
         setError(null);
-        console.log(list);
-        console.log(email);
         try {
             await postVote({
-                jobQuery: {
-                    list: list,
-                    email: email
-                },
+                songs: list,
+                email: email,
             });
         } catch (e) {
             setError(e.message);
