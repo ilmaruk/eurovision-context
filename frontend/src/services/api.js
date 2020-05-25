@@ -11,7 +11,7 @@ const getAllSongs = () =>{
         .then(response => response.json())
         .then(response => response)
         .catch(error => error);
-}
+};
 
 
 const postVote = vote => {
@@ -26,10 +26,23 @@ const postVote = vote => {
         .then(response => response.json())
         .then(response => response)
         .catch(error => error);
-}
+};
+
+const getResults = () => {
+    return fetch(`${API_URL}/results`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(response => response)
+        .catch(error => error);
+};
 
 
 export {
     getAllSongs,
-    postVote
+    postVote,
+    getResults
 };

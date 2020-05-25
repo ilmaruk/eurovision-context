@@ -5,12 +5,14 @@ import Header from "./components/Header";
 import PageListView from './pages/ListView'
 import PageNotFound from './pages/NotFound'
 import PageThankYou from './pages/ThankYou'
+import PageResultsView from './pages/ResultsView'
 
 import { AppProvider } from './state/AppContext';
 
 const routes = {
     '/vote': () => <PageListView />,
-    '/thankyou': () => <PageThankYou />
+    '/thankyou': () => <PageThankYou />,
+    '/results': () => <PageResultsView />
 };
 
 const App = () => {
