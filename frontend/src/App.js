@@ -5,12 +5,15 @@ import Header from "./components/Header";
 import PageListView from './pages/ListView'
 import PageNotFound from './pages/NotFound'
 import PageThankYou from './pages/ThankYou'
+import PageCountdown from './pages/CountdownView'
 
 import { AppProvider } from './state/AppContext';
 
 const routes = {
     '/vote': () => <PageListView />,
-    '/thankyou': () => <PageThankYou />
+    '/thankyou': () => <PageThankYou />,
+    '/notfound': () => <PageNotFound />,
+    '/countdown': () => <PageCountdown />
 };
 
 const App = () => {
