@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import { getAllSongs, postVote } from "../services/api";
-import { mockedData } from '../mockedData/mockedApi'
 import useAppContext from '../hooks/useAppContext';
 
 const initialDnDState = {
@@ -15,8 +14,9 @@ const Table = () => {
 
     const [list, setList] = React.useState([]);
     const [email, setEmail] = React.useState('');
+    const [error, setError] = React.useState('');
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
-    const { setError } = useAppContext();
+    //const { setError } = useAppContext();
 
 
     useEffect(() => {
@@ -39,7 +39,6 @@ const Table = () => {
         // Without it, the DnD won't work.
         event.dataTransfer.setData("text/html", '');
     }
-
     const onDragOver = (event) => {
 
         event.preventDefault();
@@ -66,8 +65,6 @@ const Table = () => {
         }
 
     }
-
-
     const onDrop = (event) => {
         setList(dragAndDrop.updatedOrder);
         setDragAndDrop({
@@ -93,6 +90,7 @@ const Table = () => {
                 email: email,
             });
         } catch (e) {
+            console.log(e)
             setError(e.message);
         }
     };
@@ -152,9 +150,12 @@ const Table = () => {
                             <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
                         </div>
                         <div>
-                            <button type="button" className="button is-link" onClick={handleVote}>
-                                VOTE
+                            <button type="button" className={`button is-medium ${error} ? `} onClick={handleVote}>
+                                {!error && <a href={'/thankyou'}>
+                                    VOTE
+                                </a>}
                             </button>
+                            <div>{error}</div>
                         </div>
                     </form>
                 </section>
