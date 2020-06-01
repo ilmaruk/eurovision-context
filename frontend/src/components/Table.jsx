@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { getAllSongs, postVote } from "../services/api";
 import useAppContext from '../hooks/useAppContext';
+import Youtube from '../components/YoutubeThumbnail'
 
 const initialDnDState = {
     draggedFrom: null,
@@ -140,7 +141,7 @@ const Table = () => {
                                             <td>{item.title}</td>
                                             <td>{item.country}</td>
                                             <td>{item.artist}</td>
-                                            <td>{item.link}</td>
+                                            <td><Youtube videoId={'Jl_qEw_4OK0'} /></td>
                                         </tr>
                                     </tbody>
                                 )

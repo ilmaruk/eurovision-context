@@ -14,7 +14,7 @@ const routes = {
     '/vote': () => <PageListView />,
     '/thankyou': () => <PageThankYou />,
     '/notfound': () => <PageNotFound />,
-    '/countdown': () => <PageCountdown />
+    '/countdown': () => <PageCountdown />,
     '/results': () => <PageResultsView />
 };
 
