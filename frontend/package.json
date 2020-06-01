@@ -11,7 +11,9 @@
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "bulma": "^0.8.2",
+    "react-timer-hook": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
