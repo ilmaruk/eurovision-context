@@ -1,5 +1,8 @@
 import os
 import smtplib
+
+from urllib.parse import urlparse, parse_qs
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from http import HTTPStatus
@@ -21,7 +24,14 @@ def index():
 def list_songs() -> (str, int):
     """Return a JSON blob with the list of songs.
     """
-    return jsonify([s.serialise() for s in get_all_songs()]), HTTPStatus.OK
+    songs = []
+    for s in get_all_songs():
+        serialised = s.serialise()
+        parsed_url = urlparse(serialised["link"])
+        parsed_qs = parse_qs(parsed_url.query)
+        serialised["video_id"] = parsed_qs["v"][0]
+        songs.append(serialised)
+    return jsonify(songs), HTTPStatus.OK
 
 
 @app.route("/vote", methods=["POST"])
