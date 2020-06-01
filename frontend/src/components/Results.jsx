@@ -4,15 +4,15 @@ import {getResults} from "../services/api";
 const ResultsList = () => {
     const [songs, updateResults] = React.useState([]);
 
-    useEffect(() => {
-        try {
-            getResults().then(results => {
-                updateResults(results.results);
-            });
-        } catch (e) {
-            console.log(e.message);
-        }
-    }, []);
+    // useEffect(() => {
+    //     try {
+    //         getResults().then(results => {
+    //             updateResults(results.results);
+    //         });
+    //     } catch (e) {
+    //         console.log(e.message);
+    //     }
+    // }, []);
 
     //load somehow fancy?
     // useEffect(function effectFunction() {
@@ -28,6 +28,26 @@ const ResultsList = () => {
     //     fetchResults();
     // }, []);
 
+    //load somehow fancy?
+    useEffect(function effectFunction() {
+        let l = 1;
+        (function myLoop(l) {
+            setTimeout(function() {
+                try {
+                    getResults(l).then(results => {
+                        updateResults(results.results);
+                        if (results.votes_total !== results.votes_used) {
+                            myLoop(++l)
+                        }
+                    });
+                } catch (e) {
+                    console.log(e.message);
+                    // Try again
+                    myLoop(l)
+                }
+            }, 1000)
+        })(l)
+    }, []);
 
     return (
         <>
