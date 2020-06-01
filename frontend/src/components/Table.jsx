@@ -141,7 +141,7 @@ const Table = () => {
                                             <td>{item.title}</td>
                                             <td>{item.country}</td>
                                             <td>{item.artist}</td>
-                                            <td><Youtube videoId={'Jl_qEw_4OK0'} /></td>
+                                            <td><Youtube videoId={item.video_id} /></td>
                                         </tr>
                                     </tbody>
                                 )
