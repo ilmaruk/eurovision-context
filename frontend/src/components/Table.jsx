@@ -121,7 +121,7 @@ const Table = () => {
                                     <th>Title</th>
                                     <th>Country</th>
                                     <th>Artist</th>
-                                    <th>Link</th>
+                                    <th>Youtube</th>
                                 </tr>
                             </thead>
                             {list.map( (item, index) => {
