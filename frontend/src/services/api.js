@@ -28,8 +28,8 @@ const postVote = vote => {
         .catch(error => error);
 };
 
-const getResults = () => {
-    return fetch(`${API_URL}/results`, {
+const getResults = (l) => {
+    return fetch(`${API_URL}/results?l=${l}`, {
         method: 'get',
         headers: {
             'Content-Type': 'application/json',
