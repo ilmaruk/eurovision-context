@@ -15,7 +15,7 @@ const routes = {
     '/thankyou': () => <PageThankYou />,
     '/notfound': () => <PageNotFound />,
     '/countdown': () => <PageCountdown />,
-    '/results': () => <PageResultsView />,
+    '/results': () => <PageResultsView />
 };
 
 const App = () => {
