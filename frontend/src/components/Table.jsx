@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import { getAllSongs, postVote } from "../services/api";
-import useAppContext from '../hooks/useAppContext';
 import Youtube from '../components/YoutubeThumbnail'
 
 const initialDnDState = {

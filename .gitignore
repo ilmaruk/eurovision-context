@@ -5,6 +5,8 @@
 
 # IDEs
 .idea/
+# dependencies
+/node_modules
 
 # Docker
 docker-compose.override.yaml
