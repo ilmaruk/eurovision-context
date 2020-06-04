@@ -20,8 +20,6 @@ const CountdownView = ({ expiryTimestamp }) => {
             <div style={{fontSize: '100px'}}>
                 <span>{minutes}</span>:<span>{seconds}</span>
             </div>
-            <button onClick={pause}>Pause</button>
-            <button onClick={resume}>Resume</button>
         </div>
     );
 }
