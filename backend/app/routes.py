@@ -70,7 +70,7 @@ def list_results() -> (str, int):
         results["next"] = f"{request.base_url}?l={limit+1}"
 
     for s in results["results"]:
-        s["var"] = "="
+        s["var"] = "⥈"
     if limit > 1:
         prev = get_results(limit-1)
         for cp, c in enumerate(results["results"]):

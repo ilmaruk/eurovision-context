@@ -68,7 +68,7 @@ const ResultsList = () => {
                         <tbody key={`tbody-${index}`}>
                             <tr key={index}>
                                 <td>{item.points}</td>
-                                <td>{item.var} {item.song.country}</td>
+                                <td>{item.var}&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp; {item.song.country}</td>
                                 <td>{item.song.artist}</td>
                                 <td>{item.song.title}</td>
                             </tr>

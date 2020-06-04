@@ -140,7 +140,7 @@ const Table = () => {
                                             className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "") + index}
                                         >
                                             <td>{item.title}</td>
-                                            <td>{item.country}<img src={process.env.PUBLIC_URL + `/flags/${item.country}.svg`} className="imgFlag"/></td>
+                                            <td>{item.country}&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.country}.svg`} className="imgFlag"/></td>
                                             <td>{item.artist}</td>
                                             <td><Youtube videoId={item.video_id} /></td>
                                         </tr>
