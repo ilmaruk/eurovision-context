@@ -9,8 +9,8 @@ const Youtube = ({videoId}) => {
     };
 
     const opts = {
-        height: '150',
-        width: '200',
+        height: '70',
+        width: '120',
         playerVars: {
             autoplay: 0,
         },
