@@ -2,6 +2,8 @@ import operator
 import typing
 import uuid
 
+from sqlalchemy.exc import IntegrityError
+
 from app import db
 from app.models import Song, Vote, VoteSong
 
@@ -29,6 +31,9 @@ def set_vote(vote: typing.Dict, skip_validation: bool = False) -> Vote:
             db.session.add(s)
 
         db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        raise Exception("this email address has already used to vote")
     except Exception as error:
         db.session.rollback()
         raise

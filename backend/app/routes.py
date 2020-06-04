@@ -45,12 +45,12 @@ def handle_vote() -> (str, int):
 
     error = validate_vote(vote)
     if error is not None:
-        return jsonify({"error": f"invalid payload: {error}"}), HTTPStatus.BAD_REQUEST
+        return jsonify({"error": error}), HTTPStatus.BAD_REQUEST
 
     try:
         v = set_vote(vote, SKIP_VOTE_VALIDATION)
     except Exception as error:
-        return jsonify({"error": f"invalid vote: {str(error)}"}), HTTPStatus.BAD_REQUEST
+        return jsonify({"error": str(error)}), HTTPStatus.BAD_REQUEST
 
     if not SKIP_VOTE_VALIDATION:
         send_validation_code(vote["email"], v.validation)

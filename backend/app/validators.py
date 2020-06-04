@@ -7,7 +7,7 @@ def validate_vote(vote: typing.Dict) -> typing.Optional[str]:
         if not validate_songs(vote["songs"]):
             return "invalid songs list"
         if not validate_email(vote["email"]):
-            return "invalid email address"
+            return "invalid email address; only Oracle email addresses are allowed"
     except KeyError as error:
         return f"missing field {str(error)}"
 
