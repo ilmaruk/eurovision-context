@@ -8,12 +8,11 @@ const CountdownView = () => {
     }, []);
 
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 600);
+    time.setSeconds(time.getSeconds() + 300);
 
     return (
         <>
             <div className="container">
-                <h1 className="title">Countdown</h1>
                 <CountDown expiryTimestamp={time}/>
             </div>
         </>
