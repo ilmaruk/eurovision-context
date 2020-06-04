@@ -92,8 +92,7 @@ const Table = () => {
                 songs: list,
                 email: email,
             });
-            console.log("res");
-            console.log(res);
+
             if(!res.error) {
                 navigate('/thankyou', true);
             } else {
