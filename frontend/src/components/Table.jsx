@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { getAllSongs, postVote } from "../services/api";
 import Youtube from '../components/YoutubeThumbnail'
+import {navigate} from "hookrouter";
 
 const initialDnDState = {
     draggedFrom: null,
@@ -83,17 +84,28 @@ const Table = () => {
 
     };
 
-    const handleVote = async () => {
+    const handleVote = async (e) => {
+        e.preventDefault();
         setError(false);
         try {
-            await postVote({
+            const res = await postVote({
                 songs: list,
                 email: email,
             });
+            console.log("res");
+            console.log(res);
+            if(!res.error) {
+                navigate('/thankyou', true);
+            } else {
+                setError(true);
+                setErrorMessage(e.message);
+            }
         } catch (e) {
-            console.log(e)
+            console.log("ecatch")
             setError(true);
             setErrorMessage(e.message);
+            e.preventDefault();
+            return;
         }
     };
 
@@ -137,7 +149,7 @@ const Table = () => {
                                             onDragOver={onDragOver}
                                             onDrop={onDrop}
                                             onDragLeave={onDragLeave}
-                                            className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "") + index}
+                                            className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "")}
                                         >
                                             <td>{item.title}</td>
                                             <td>{item.country}<img src={process.env.PUBLIC_URL + `/flags/${item.country}.svg`} className="imgFlag"/></td>
@@ -152,15 +164,13 @@ const Table = () => {
                             <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
                         </div>
                         <div>
+                            <div>{errorMessage}</div>
                             <button type="button" className="button is-medium" onClick={handleVote}>
-                                {!error && <a href={'/thankyou'}>
-                                    VOTE
-                                </a>}
-                                {
-                                    error && <div style={{color: `red`}}>some error occurred</div>
-                                }
+                                VOTE
                             </button>
-                            <div>{error}</div>
+                            {
+                                error && <div style={{color: `red`}}>some error occurred</div>
+                            }
                         </div>
                     </form>
                 </section>

@@ -12,7 +12,7 @@ const Youtube = ({videoId}) => {
         height: '150',
         width: '200',
         playerVars: {
-            autoplay: 1,
+            autoplay: 0,
         },
     };
 

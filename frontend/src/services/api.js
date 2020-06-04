@@ -15,7 +15,6 @@ const getAllSongs = () =>{
 
 
 const postVote = vote => {
-    console.log(JSON.stringify(vote))
     return fetch(`${API_URL}/vote`, {
         method: 'post',
         headers: {
