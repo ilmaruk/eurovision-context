@@ -49,7 +49,7 @@ def upgrade():
     op.bulk_insert(songs,
                    [
                        {"artist": "Sandro", "title": "Running", "country": "Cyprus", "link": "https://www.youtube.com/watch?v=Jl_qEw_4OK0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=21"},
-                       {"artist": "Tom Leeb", "title": "Mon alliée (The Best in Me)", "country": "France", "link": "https://www.youtube.com/watch?v=D02Xlo_LfRU&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=35"},
+                       {"artist": "Tom Leeb", "title": "Mon alliée (The Best in Me)", "country": "France", "link": "https://www.youtube.com/watch?v=J5SOdhXjYko&list=RDJ5SOdhXjYko&start_radio=1&t=6"},
                        {"artist": "Ben Dolic", "title": "Violent Thing", "country": "Germany", "link": "https://www.youtube.com/watch?v=hAobDQ9GbT4&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=31"},
                        {"artist": "Stefania", "title": "Supergirl", "country": "Greece", "link": "https://www.youtube.com/watch?v=dJxCINWp_j0&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=10"},
                        {"artist": "Daði og Gagnamagnið", "title": "Think About Things", "country": "Iceland", "link": "https://www.youtube.com/watch?v=1HU7ocv3S2o&list=PLmWYEDTNOGUL69D2wj9m2onBKV2s3uT5Y&index=18"},
