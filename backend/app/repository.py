@@ -61,7 +61,8 @@ def get_results(limit: int) -> typing.Dict:
                     "song": vs.song.serialise(),
                     "points": 0,
                 }
-            totals[id]["points"] += _points_map[vs.position]
+            if vs.position < len(_points_map):
+                totals[id]["points"] += _points_map[vs.position]
 
     data = {
         "results": sorted(totals.values(), key=lambda r: r["points"], reverse=True),
