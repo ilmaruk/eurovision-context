@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {getResults} from "../services/api";
 
 const ResultsList = () => {
-    const [songs, updateResults] = React.useState([]);
+    const [info, updateInfo] = React.useState([]);
 
     // useEffect(() => {
     //     try {
@@ -35,7 +35,8 @@ const ResultsList = () => {
             setTimeout(function() {
                 try {
                     getResults(l).then(results => {
-                        updateResults(results.results);
+                        results.votes_pct = (results.votes_used / results.votes_total * 100.).toFixed(1);
+                        updateInfo(results);
                         if (results.votes_total !== results.votes_used) {
                             myLoop(++l)
                         }
@@ -45,12 +46,14 @@ const ResultsList = () => {
                     // Try again
                     myLoop(l)
                 }
-            }, 1000)
+            }, 10000)
         })(l)
     }, []);
 
     return (
         <>
+            <div className="votes_info">Counting {info.votes_used} votes out of {info.votes_total} ({info.votes_pct}%)</div>
+            <div className="votes_info">Last vote from: <strong>{info.last}</strong></div>
             <table>
                 <thead>
                     <tr>
@@ -60,7 +63,7 @@ const ResultsList = () => {
                         <th>Country</th>
                     </tr>
                 </thead>
-                {songs && songs.map( (item, index) => {
+                {info.results && info.results.map( (item, index) => {
                     return(
                         <tbody key={`tbody-${index}`}>
                             <tr key={index}>
@@ -71,7 +74,8 @@ const ResultsList = () => {
                             </tr>
                         </tbody>
                     )
-                })}
+                })
+                }
             </table>
         </>
     );

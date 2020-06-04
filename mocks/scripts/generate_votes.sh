@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-host="${host:-http://localhost:9002}"
+host="${host:-http://localhost:5000}"
 votes="${votes:-1}"
 
 for i in $(seq 1 $votes); do
