@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react'
 import {getResults} from "../services/api";
+import Youtube from "./YoutubeThumbnail";
 
 const ResultsList = () => {
     const [info, updateInfo] = React.useState([]);
+    const [final, setFinal] = React.useState(false);
 
     // useEffect(() => {
     //     try {
@@ -39,6 +41,8 @@ const ResultsList = () => {
                         updateInfo(results);
                         if (results.votes_total !== results.votes_used) {
                             myLoop(++l)
+                        } else {
+                            setFinal(true);
                         }
                     });
                 } catch (e) {
@@ -52,11 +56,15 @@ const ResultsList = () => {
 
     return (
         <>
-            <div className="votes_info">Counting {info.votes_used} votes out of {info.votes_total} ({info.votes_pct}%)</div>
-            <div className="votes_info">Last vote from: <strong>{info.last}</strong></div>
+            {info.results && <div className="votes_info">
+                <div className="votes_counter">Counting {info.votes_used} votes out of {info.votes_total} ({info.votes_pct}%)</div>
+                <div className="votes_last">Last vote from: {info.last}</div>
+            </div>}
+
             <table>
                 <thead>
                     <tr>
+                        <th>Position</th>
                         <th>Points</th>
                         <th>Country</th>
                         <th>Artist</th>
@@ -64,11 +72,21 @@ const ResultsList = () => {
                     </tr>
                 </thead>
                 {info.results && info.results.map( (item, index) => {
+                    let arrowClass = "black";
+                    let arrow = "⥈";
+                    if (item.var > 0) {
+                        arrowClass = "green";
+                        arrow = "⇡";
+                    } else if (item.var < 0) {
+                        arrowClass = "red";
+                        arrow = "⇣";
+                    }
                     return(
                         <tbody key={`tbody-${index}`}>
                             <tr key={index}>
+                                <td>{index+1}</td>
                                 <td>{item.points}</td>
-                                <td>{item.var}&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp; {item.song.country}</td>
+                                <td><span className={arrowClass}>{arrow}</span>&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp;{item.song.country}</td>
                                 <td>{item.song.artist}</td>
                                 <td>{item.song.title}</td>
                             </tr>
@@ -77,6 +95,12 @@ const ResultsList = () => {
                 })
                 }
             </table>
+
+            {info.results && final && <div className="winner">
+                And the Winner is:<br/>
+                <img src={process.env.PUBLIC_URL + `/flags/${info.results[0].song.country}.svg`} className="imgFlag"/>&nbsp;{info.results[0].song.country}<br/>
+                <Youtube videoId={info.results[0].song.video_id} />
+            </div>}
         </>
     );
 };

@@ -71,12 +71,16 @@ def list_results() -> (str, int):
 
     for s in results["results"]:
         s["var"] = "⥈"
+        parsed_url = urlparse(s["song"]["link"])
+        parsed_qs = parse_qs(parsed_url.query)
+        s["song"]["video_id"] = parsed_qs["v"][0]
+
     if limit > 1:
         prev = get_results(limit-1)
         for cp, c in enumerate(results["results"]):
             for pp, p in enumerate(prev["results"]):
-                if p["song"]["id"] == c["song"]["id"] and pp != cp:
-                    c["var"] = "⇡" if cp < pp else "⇣"
+                if p["song"]["id"] == c["song"]["id"]:
+                    c["var"] = pp - cp
                     break
 
     return jsonify(results), HTTPStatus.CREATED
