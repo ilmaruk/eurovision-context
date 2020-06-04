@@ -83,7 +83,7 @@ const ResultsList = () => {
                     }
                     return(
                         <tbody key={`tbody-${index}`}>
-                            <tr key={index}>
+                            <tr key={index} className={`resultsRow results${index}`}>
                                 <td>{index+1}</td>
                                 <td>{item.points}</td>
                                 <td><span className={arrowClass}>{arrow}</span>&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp;{item.song.country}</td>
