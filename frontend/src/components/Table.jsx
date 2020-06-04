@@ -115,21 +115,12 @@ const Table = () => {
     return(
         <>
             <div className="table">
-                <section>
-                    <ul>
-                        <li className="places">
-                            <span>Place</span>
-                            {list.map((value, index) => {
-                                return <span key={index}>{index+1}</span>
-                            })}
-                        </li>
-                    </ul>
-                </section>
-                <section>
+                <section className="sectionSongs">
                     <form>
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Place</th>
                                     <th>Title</th>
                                     <th>Country</th>
                                     <th>Artist</th>
@@ -150,6 +141,7 @@ const Table = () => {
                                             onDragLeave={onDragLeave}
                                             className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "")}
                                         >
+                                            <td className="place">{index+1}</td>
                                             <td>{item.title}</td>
                                             <td><img src={process.env.PUBLIC_URL + `/flags/${item.country}.svg`} className="imgFlag"/>&nbsp;{item.country}</td>
                                             <td>{item.artist}</td>
@@ -163,7 +155,6 @@ const Table = () => {
                             <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
                         </div>
                         <div>
-                            <div>{errorMessage}</div>
                             <button type="button" className="button is-medium" onClick={handleVote}>
                                 VOTE
                             </button>
