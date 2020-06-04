@@ -84,11 +84,11 @@ const ResultsList = () => {
                     return(
                         <tbody key={`tbody-${index}`}>
                             <tr key={index} className={`resultsRow results${index}`}>
-                                <td>{index+1}</td>
-                                <td>{item.points}</td>
-                                <td><span className={arrowClass}>{arrow}</span>&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp;{item.song.country}</td>
-                                <td>{item.song.artist}</td>
-                                <td>{item.song.title}</td>
+                                <td className="results">{index+1}</td>
+                                <td className="results">{item.points}</td>
+                                <td className="results"><span className={arrowClass}>{arrow}</span>&nbsp;<img src={process.env.PUBLIC_URL + `/flags/${item.song.country}.svg`} className="imgFlag"/>&nbsp;{item.song.country}</td>
+                                <td className="results">{item.song.artist}</td>
+                                <td className="results">{item.song.title}</td>
                             </tr>
                         </tbody>
                     )

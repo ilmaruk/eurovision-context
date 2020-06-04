@@ -60,3 +60,8 @@ tr.results1 {
 tr.results2 {
     background-color: #ddffdd;
 }
+
+td.results {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
