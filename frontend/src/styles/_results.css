@@ -2,7 +2,6 @@
     margin-bottom: 10px;
 }
 
-.thankyou {
-    font-size: 1.75rem;
-    font-style: italic;
+.number {
+    text-align: right;
 }

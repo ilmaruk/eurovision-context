@@ -69,6 +69,16 @@ def list_results() -> (str, int):
     if limit > 0:
         results["next"] = f"{request.base_url}?l={limit+1}"
 
+    for s in results["results"]:
+        s["var"] = "="
+    if limit > 1:
+        prev = get_results(limit-1)
+        for cp, c in enumerate(results["results"]):
+            for pp, p in enumerate(prev["results"]):
+                if p["song"]["id"] == c["song"]["id"] and pp != cp:
+                    c["var"] = "⇡" if cp < pp else "⇣"
+                    break
+
     return jsonify(results), HTTPStatus.CREATED
 
 

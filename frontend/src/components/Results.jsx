@@ -57,10 +57,10 @@ const ResultsList = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Place</th>
                         <th>Points</th>
-                        <th>Title</th>
                         <th>Country</th>
+                        <th>Artist</th>
+                        <th>Song</th>
                     </tr>
                 </thead>
                 {info.results && info.results.map( (item, index) => {
@@ -68,9 +68,9 @@ const ResultsList = () => {
                         <tbody key={`tbody-${index}`}>
                             <tr key={index}>
                                 <td>{item.points}</td>
-                                <td>{item.song.title}</td>
-                                <td>{item.song.country}</td>
+                                <td>{item.var} {item.song.country}</td>
                                 <td>{item.song.artist}</td>
+                                <td>{item.song.title}</td>
                             </tr>
                         </tbody>
                     )
