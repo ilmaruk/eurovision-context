@@ -36,9 +36,46 @@
         }
       }
     }
-
   }
 }
+
+.control {
+  box-sizing: border-box;
+  clear: both;
+  font-size: 1rem;
+  position: relative;
+  text-align: left;
+  max-width: 50%;
+  padding-top: 35px;
+  .input {
+    font-size: 1.25rem;
+    max-width: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    color: #363636;
+    -webkit-appearance: none;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: none;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(.5em - 1px) calc(.75em - 1px);
+    position: relative;
+    vertical-align: top;
+  }
+}
+
+.button {
+  margin-top: 45px;
+  background-color: #2e96a3 !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  float: right;
+  margin-right: 15px;
+}
+
 
 .imgFlag {
   height: 1rem;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useAppContext from '../hooks/useAppContext';
 import Table from '../components/Table'
 
 const ListView = () => {

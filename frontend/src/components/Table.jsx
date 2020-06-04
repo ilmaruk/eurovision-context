@@ -18,7 +18,6 @@ const Table = () => {
     const [error, setError] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState('');
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
-    //const { setError } = useAppContext();
 
 
     useEffect(() => {
@@ -151,16 +150,18 @@ const Table = () => {
                                 )
                             })}
                         </table>
-                        <div className="">
-                            <input className="input" type="email" placeholder="Please insert your Oracle email" onChange={handleChange}/>
-                        </div>
-                        <div>
-                            <button type="button" className="button is-medium" onClick={handleVote}>
-                                VOTE
-                            </button>
-                            {
-                                error && <div style={{color: `red`}}>{errorMessage}</div>
-                            }
+                        <div className="field">
+                            <div className="control">
+                                <input className="input is-medium" type="text" placeholder="Please insert your Oracle email" onChange={handleChange} />
+                            </div>
+                            <div>
+                                <button type="submit" className="button is-large" onClick={handleVote}>
+                                    VOTE
+                                </button>
+                                {
+                                    error && <div style={{color: `red`}}>{errorMessage}</div>
+                                }
+                            </div>
                         </div>
                     </form>
                 </section>
