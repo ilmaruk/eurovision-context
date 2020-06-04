@@ -14,7 +14,8 @@ const Table = () => {
 
     const [list, setList] = React.useState([]);
     const [email, setEmail] = React.useState('');
-    const [error, setError] = React.useState('');
+    const [error, setError] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState('');
     const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
     //const { setError } = useAppContext();
 
@@ -83,7 +84,7 @@ const Table = () => {
     };
 
     const handleVote = async () => {
-        setError(null);
+        setError(false);
         try {
             await postVote({
                 songs: list,
@@ -91,7 +92,8 @@ const Table = () => {
             });
         } catch (e) {
             console.log(e)
-            setError(e.message);
+            setError(true);
+            setErrorMessage(e.message);
         }
     };
 
@@ -138,7 +140,7 @@ const Table = () => {
                                             className={(dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : "") + index}
                                         >
                                             <td>{item.title}</td>
-                                            <td>{item.country}</td>
+                                            <td>{item.country}<img src={process.env.PUBLIC_URL + `/flags/${item.country}.svg`} className="imgFlag"/></td>
                                             <td>{item.artist}</td>
                                             <td><Youtube videoId={item.video_id} /></td>
                                         </tr>
@@ -151,9 +153,12 @@ const Table = () => {
                         </div>
                         <div>
                             <button type="button" className="button is-medium" onClick={handleVote}>
-                                <a href={'/thankyou'}>
+                                {!error && <a href={'/thankyou'}>
                                     VOTE
-                                </a>
+                                </a>}
+                                {
+                                    error && <div style={{color: `red`}}>some error occurred</div>
+                                }
                             </button>
                             <div>{error}</div>
                         </div>
