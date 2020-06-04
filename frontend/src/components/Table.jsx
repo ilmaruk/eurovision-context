@@ -98,10 +98,10 @@ const Table = () => {
                 navigate('/thankyou', true);
             } else {
                 setError(true);
-                setErrorMessage(e.message);
+                console.log(res.error);
+                setErrorMessage(res.error);
             }
         } catch (e) {
-            console.log("ecatch")
             setError(true);
             setErrorMessage(e.message);
             e.preventDefault();
@@ -169,7 +169,7 @@ const Table = () => {
                                 VOTE
                             </button>
                             {
-                                error && <div style={{color: `red`}}>some error occurred</div>
+                                error && <div style={{color: `red`}}>{errorMessage}</div>
                             }
                         </div>
                     </form>
