@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react'
-import logo from '../assets/eurovision-logo.svg'
+import React from 'react'
 import YouTube from "react-youtube";
 
 const Youtube = ({videoId}) => {
@@ -13,7 +12,6 @@ const Youtube = ({videoId}) => {
         height: '150',
         width: '200',
         playerVars: {
-            // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
         },
     };
