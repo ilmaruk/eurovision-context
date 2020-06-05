@@ -58,3 +58,23 @@ span.black {
     }
 }
 
+tr.resultsRow {
+    border-bottom: 1px solid lightgray;
+}
+
+tr.results0 {
+    background-color: #99ee99;
+}
+
+tr.results1 {
+    background-color: #bbffbb;
+}
+
+tr.results2 {
+    background-color: #ddffdd;
+}
+
+td.results {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
