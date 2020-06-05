@@ -44,3 +44,17 @@ span.black {
     font-weight: bold;
     color: black;
 }
+
+.button.is-large.hideButton {
+    display: none;
+}
+
+.startButton{
+    display: flex;
+    justify-content: center;
+
+    .button.is-large.showButton {
+        display: flex;
+    }
+}
+
